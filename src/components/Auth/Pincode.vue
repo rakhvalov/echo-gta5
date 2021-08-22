@@ -30,6 +30,11 @@ export default {
     };
   },
 
+  mounted() {
+    const firstInput = this.$refs["pin-1"];
+    firstInput.focus();
+  },
+
   methods: {
     updatePinCode(evt, index) {
       const input = this.$refs[`pin-${index}`];
@@ -38,7 +43,7 @@ export default {
       this.focusedCell = index;
 
       if (value.length === 1 && index < this.length) {
-        document.querySelector(`.pin-${index + 1}`).focus();
+        this.$refs[`pin-${index + 1}`].focus();
       } else if (value.length > 1) {
         input.value = this.lastNumber;
       }
@@ -50,7 +55,7 @@ export default {
       input.value = "";
 
       if (!value.length && index > 1) {
-        document.querySelector(`.pin-${index - 1}`).focus();
+        this.$refs[`pin-${index - 1}`].focus();
       }
     },
   },
